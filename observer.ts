@@ -10,8 +10,7 @@
 // const equipo = new Equipo("Notebook HP", "Portátil", "disponible");
 // equipo.agregarObservador(soporte);
 // equipo.cambiarEstado("en reparación");
-// Soporte notificado: Notebook HP ha cambiad
-o su estado a en reparación.
+// Soporte notificado: Notebook HP ha cambiado su estado a en reparación.
 // ```
 
 interface Observador {

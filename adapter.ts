@@ -10,5 +10,49 @@
 // const adaptador = new AdaptadorInventario(inventarioViejo);
 // adaptador.agregarEquipo("Servidor Dell", "Servidor", "disponible");
 // console.log(adaptador.listarEquipos());
-// // [{ nombre: "Servidor Dell", tipo: "Servidor", estado: "disponible" }]
+// [{ nombre: "Servidor Dell", tipo: "Servidor", estado: "disponible" }]
 // ```
+
+interface Inventario {
+    agregarEquipo(nombre: string, tipo: string, estado: boolean): void;
+    listarEquipos(): any[];
+}
+
+class InventarioViejo {
+    private items: any[] = [];
+
+    public agregarItem(item: { nombre: string, tipo: string, estado: string }): void {
+        this.items.push(item)
+    }
+
+    public listarItems(): any[] {
+        return this.items;
+    }
+}
+
+class AdaptadorInventario implements Inventario {
+    private inventarioViejo: InventarioViejo;
+
+    constructor(inventarioViejo: InventarioViejo) {
+        this.inventarioViejo = inventarioViejo;
+    }
+
+    agregarEquipo(nombre: string, tipo: string, estado: boolean): void {
+
+        const item = { nombre, tipo, estado: estado ? "Disponible" : "No disponible" };
+
+        this.inventarioViejo.agregarItem(item); // ! Usar el método del sistema viejo
+    }
+
+    //! Listar los equipos usando el método del sistema viejo
+    listarEquipos(): any[] {
+        return this.inventarioViejo.listarItems();
+    }
+}
+
+// * Uso del patrón Adaptador
+const inventarioViejo = new InventarioViejo();
+const adaptador = new AdaptadorInventario(inventarioViejo);
+adaptador.agregarEquipo("Servidor Dell", "Servidor", true);
+console.log(adaptador.listarEquipos());
+
