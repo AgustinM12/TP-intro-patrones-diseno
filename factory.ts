@@ -102,4 +102,3 @@ const servidor = factory.crearProducto("Servidor", "Servidor Principal", "", "",
 notebook.detalles()
 desktop.detalles()
 servidor.detalles()
-
