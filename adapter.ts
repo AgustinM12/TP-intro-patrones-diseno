@@ -14,7 +14,8 @@
 // ```
 
 interface Inventario {
-    agregarEquipo(nombre: string, tipo: string, estado: boolean): void;
+    newAgregarEquipo(nombre: string, tipo: string, estado: boolean): void;
+
     listarEquipos(): any[];
 }
 
@@ -31,14 +32,16 @@ class InventarioViejo {
 }
 
 class AdaptadorInventario implements Inventario {
+
     private inventarioViejo: InventarioViejo;
 
     constructor(inventarioViejo: InventarioViejo) {
         this.inventarioViejo = inventarioViejo;
     }
 
-    agregarEquipo(nombre: string, tipo: string, estado: boolean): void {
+    newAgregarEquipo(nombre: string, tipo: string, estado: boolean): void {
 
+        
         const item = { nombre, tipo, estado: estado ? "Disponible" : "No disponible" };
 
         this.inventarioViejo.agregarItem(item); // ! Usar el método del sistema viejo
@@ -53,6 +56,6 @@ class AdaptadorInventario implements Inventario {
 // * Uso del patrón Adaptador
 const inventarioViejo = new InventarioViejo();
 const adaptador = new AdaptadorInventario(inventarioViejo);
-adaptador.agregarEquipo("Servidor Dell", "Servidor", true);
+adaptador.newAgregarEquipo("Servidor Dell", "Servidor", false);
 console.log(adaptador.listarEquipos());
 
